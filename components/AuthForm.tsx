@@ -33,11 +33,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       if (type === "sign-up") {
         toast.success("Account created successfully. Please sign in.");
         router.push("/sign-in");
+        console.log(values);
       } else {
         toast.success("Signed in successfully.");
         router.push("/");
