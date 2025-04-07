@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+/* what the point of using the generic here */
 interface FormFieldProps<T extends FieldValues> {
   control: Control<T>;
   name: Path<T>;

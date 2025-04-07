@@ -1,6 +1,6 @@
 "use client";
 
-import { z } from "zod";
+import { z } from "zod"; /*check what z does */
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "sonner";
@@ -84,7 +84,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             />
 
             <FormField
-              control={form.control}
+              control={form.control} /*what does the control*/
               name="password"
               label="Password"
               placeholder="Enter your password"

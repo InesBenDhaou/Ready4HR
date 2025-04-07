@@ -41,6 +41,7 @@ export const getTechLogos = async (techArray: string[]) => {
   return results;
 };
 
+/*so here we have a static list of images paths and eash time we send a random path using a random index */
 export const getRandomInterviewCover = () => {
   const randomIndex = Math.floor(Math.random() * interviewCovers.length);
   return `/covers${interviewCovers[randomIndex]}`;
