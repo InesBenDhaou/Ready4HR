@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "An AI-powered platform for preparing for mock interviews",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -23,7 +23,6 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${monaSans.className} antialiased pattern`}>
         {children}
-
         <Toaster />
       </body>
     </html>

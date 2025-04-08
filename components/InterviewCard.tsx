@@ -14,7 +14,11 @@ const InterviewCard = async ({
   techstack,
   createdAt,
 }: InterviewCardProps) => {
-  const feedback = null as Feedback | null; /*????*/
+  const feedback = null as Feedback | null;
+  // expresion reguliere va tester si le type contient le mot "mix" : mix/gi.test(type)
+  /*g (global) signifie que la recherche doit être effectuée dans toute la chaîne, pas seulement sur la première occurrence.
+
+  i (insensitive) signifie que la recherche ne tiendra pas compte de la casse (majuscules ou minuscules)*/
 
   const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
 

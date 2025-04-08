@@ -37,7 +37,7 @@ async function Home() {
         <h2>Take an Interview</h2>
         <div className="interviews-section">
           {dummyInterviews.map((interview) => (
-            <InterviewCard {...interview} />
+            <InterviewCard {...interview} key={interview.id} />
           ))}
         </div>
       </section>

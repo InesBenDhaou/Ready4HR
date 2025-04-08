@@ -26,6 +26,7 @@ export async function setSessionCookie(idToken: string) {
 }
 
 export async function signUp(params: SignUpParams) {
+  // here we will chech the backend logic (admin sdk )
   const { uid, name, email } = params;
 
   try {
@@ -49,6 +50,7 @@ export async function signUp(params: SignUpParams) {
       success: true,
       message: "Account created successfully. Please sign in.",
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error creating user:", error);
 
@@ -79,9 +81,8 @@ export async function signIn(params: SignInParams) {
       };
 
     await setSessionCookie(idToken);
-  } catch (error: any) {
-    console.log("");
-
+  } catch (error) {
+    console.log(error);
     return {
       success: false,
       message: "Failed to log into account. Please try again.",
@@ -98,8 +99,9 @@ export async function signOut() {
 
 // Get current user from session cookie
 export async function getCurrentUser(): Promise<User | null> {
+  /* cookieStore : Contains all the cookies available for the current session. It's an object or structure that allows you to retrieve cookies by their name, like "session"*/
   const cookieStore = await cookies();
-
+  /* sessionCookie : The actual session token that is stored in the session cookie. This token is used to identify the user's session and contains information like their uid and expiration time. It's signed by Firebase to ensure it’s valid*/
   const sessionCookie = cookieStore.get("session")?.value;
   if (!sessionCookie) return null;
 
@@ -125,8 +127,10 @@ export async function getCurrentUser(): Promise<User | null> {
   }
 }
 
-// Check if user is authenticated
+// Check if user is authenticated this will help up to render the routes (like homepage only for authenticated users )
 export async function isAuthenticated() {
   const user = await getCurrentUser();
-  return !!user;
+  return !!user; // this will returns a true or false but how let me explain
+  // let's suppose it returns an ojbect : {name :"ines"} then !{} --> false and !!{} --> true
+  // but what if it's null : {} then !{} --> true and !!{} --> false
 }
