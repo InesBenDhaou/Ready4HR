@@ -2,6 +2,10 @@ import { interviewCovers, mappings } from "@/constants";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+/* about cn it merges two tools "clsx" and "twMerge" */
+// clsx : will join the different css classes based on the conditions
+// twMerge : resolve conflicting Tailwind classes (takes the last one in case of conflict)
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
