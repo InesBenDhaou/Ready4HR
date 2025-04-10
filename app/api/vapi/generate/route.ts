@@ -11,7 +11,7 @@ export async function GET() {
     }
   );
 }
-// this api called by the assisstant to speak with gemini (he will provide gemini with needed infos to genrate questions)
+// this api called by the assisstant vapi to speak with gemini (he will provide gemini with needed infos to genrate questions) (this api is called inside the workflow that we've previously created)
 export async function POST(request: Request) {
   const { type, role, level, techstack, amount, userid } = await request.json();
 

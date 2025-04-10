@@ -66,6 +66,8 @@ export async function createFeedback(params: CreateFeedbackParams) {
   }
 }
 
+/* reminder about the promise type : an objet who represents a value which is not available at the moment but it will be later */
+
 export async function getInterviewById(id: string): Promise<Interview | null> {
   const interview = await db.collection("interviews").doc(id).get();
 
@@ -90,6 +92,7 @@ export async function getFeedbackByInterviewId(
   return { id: feedbackDoc.id, ...feedbackDoc.data() } as Feedback;
 }
 
+// here we will take the interviews who doesn't belong to the authenticated user
 export async function getLatestInterviews(
   params: GetLatestInterviewsParams
 ): Promise<Interview[] | null> {
@@ -99,7 +102,7 @@ export async function getLatestInterviews(
     .collection("interviews")
     .orderBy("createdAt", "desc")
     .where("finalized", "==", true)
-    .where("userId", "!=", userId)
+    .where("userid", "!=", userId)
     .limit(limit)
     .get();
 
@@ -109,14 +112,20 @@ export async function getLatestInterviews(
   })) as Interview[];
 }
 
+// calling this kind of function may lead to index problems which means the firestore will need to create a complex
+// index because of where and orderBy to faster the search operation
+
 export async function getInterviewsByUserId(
   userId: string
 ): Promise<Interview[] | null> {
   const interviews = await db
     .collection("interviews")
-    .where("userId", "==", userId)
+    .where("userid", "==", userId)
     .orderBy("createdAt", "desc")
     .get();
+  console.log(interviews);
+  // un objet de type QuerySnapshot de Firebase qui contient (interviews.docs , interviews.empty , interviews.size)
+  // interviews.docs tjrs un element non exploitable donc Il faut convertir chaque doc en un objet JavaScript utilisable
 
   return interviews.docs.map((doc) => ({
     id: doc.id,
