@@ -8,7 +8,7 @@ const Page = async () => {
     <>
       <h3>Interview Generation</h3>
       {/*The only job for this agent is a take information from the user to generate questions using gemini */}
-      <Agent userName={user?.name} userId={user?.id} type="generate" />
+      <Agent userName={user?.name!} userId={user?.id} type="generate" />
     </>
   );
 };
